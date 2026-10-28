@@ -72,5 +72,6 @@ Estimating 3D kinematics from uncalibrated monocular broadcast cricket videos in
 
 ## 6. Directory Layout
 - `CricShot10k_ Shot Dataset/` : Source RAR archives of cricket shot clips.
-- `outputs/` : Extracted sample clips, intermediate keypoint representations, and 3D pose results.
+- `outputs/sample_clips/` : Small AVI samples for pose analysis and matching MP4 previews for browser playback.
+- `outputs/` : Intermediate keypoint representations and 3D pose results.
 - `reports/` : Experimental benchmarks, ablation notes, and progress reports.

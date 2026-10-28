@@ -10,7 +10,6 @@ Features:
 
 from pathlib import Path
 import json
-import time
 import cv2
 import numpy as np
 import streamlit as st
@@ -112,6 +111,14 @@ def get_pose_detector():
         num_poses=1
     )
     return vision.PoseLandmarker.create_from_options(options)
+
+
+def step_pose_frame(delta: int, total_frames: int) -> None:
+    current_frame = st.session_state.timeline_frame
+    st.session_state.timeline_frame = max(
+        0, min(total_frames - 1, current_frame + delta)
+    )
+
 
 @st.cache_data
 def load_and_cache_clip_data(clip_rel_path: str):
@@ -263,7 +270,7 @@ clip_dict = {f"{c.parent.name} - {c.name}": str(c.relative_to(BASE_DIR)).replace
 # --- PAGE 1: INTERACTIVE 3D VIEWER ---
 if nav_choice == "🎬 Interactive 3D Viewer":
     st.title("Interactive 3D Cricket Player Pose Analytics")
-    st.caption("Synchronized 2D broadcast video telemetry and monocular 3D body landmark visualization.")
+    st.caption("Play a sample clip and inspect its video frames alongside monocular 3D body landmarks.")
 
     # Controls Bar in Sidebar
     st.sidebar.subheader("Clip Selection")
@@ -276,42 +283,44 @@ if nav_choice == "🎬 Interactive 3D Viewer":
         frames_bgr, poses_wlm, detections, total_frames = load_and_cache_clip_data(selected_clip_path)
 
     st.sidebar.markdown("---")
-    st.sidebar.subheader("Playback & Scrubbing")
+    st.sidebar.subheader("Pose Frame Scrubbing")
 
-    # Session state for playback
-    if "current_frame" not in st.session_state:
-        st.session_state.current_frame = 12 if total_frames > 12 else 0
-    if "is_playing" not in st.session_state:
-        st.session_state.is_playing = False
+    # Session state for the pose-frame slider
+    if "timeline_frame" not in st.session_state:
+        st.session_state.timeline_frame = 12 if total_frames > 12 else 0
+    else:
+        st.session_state.timeline_frame = min(
+            st.session_state.timeline_frame, total_frames - 1
+        )
 
     # Slider control
     selected_frame = st.sidebar.slider(
         "Timeline Frame Index",
         min_value=0,
         max_value=total_frames - 1,
-        value=st.session_state.current_frame,
-        step=1
+        step=1,
+        key="timeline_frame"
     )
-    st.session_state.current_frame = selected_frame
 
-    # Play/Pause & Step Buttons
-    col_btn1, col_btn2, col_btn3 = st.sidebar.columns([1, 1, 1])
+    # Step buttons scrub the pose frame independently of the video player's controls.
+    col_btn1, col_btn2 = st.sidebar.columns(2)
     with col_btn1:
-        if st.button("◀ Step"):
-            st.session_state.current_frame = max(0, st.session_state.current_frame - 1)
-            st.rerun()
+        st.button(
+            "◀ Step",
+            on_click=step_pose_frame,
+            args=(-1, total_frames),
+            use_container_width=True
+        )
     with col_btn2:
-        play_label = "❚❚ Pause" if st.session_state.is_playing else "► Play"
-        if st.button(play_label):
-            st.session_state.is_playing = not st.session_state.is_playing
-            st.rerun()
-    with col_btn3:
-        if st.button("Step ▶"):
-            st.session_state.current_frame = min(total_frames - 1, st.session_state.current_frame + 1)
-            st.rerun()
+        st.button(
+            "Step ▶",
+            on_click=step_pose_frame,
+            args=(1, total_frames),
+            use_container_width=True
+        )
 
     # Main Visualizer Dual Panel
-    f_idx = st.session_state.current_frame
+    f_idx = selected_frame
     has_pose = detections[f_idx]
     current_landmarks = poses_wlm[f_idx]
     current_frame_bgr = frames_bgr[f_idx]
@@ -330,7 +339,15 @@ if nav_choice == "🎬 Interactive 3D Viewer":
     col_video, col_3d = st.columns([1.1, 1.2])
 
     with col_video:
-        st.subheader("Source Video Frame")
+        st.subheader("Source Video")
+        video_path = (BASE_DIR / selected_clip_path).with_suffix(".mp4")
+        if video_path.is_file():
+            st.video(video_path.read_bytes(), format="video/mp4")
+            st.caption("Video playback is independent of the pose-frame scrubber.")
+        else:
+            st.error(f"Sample video file missing: {video_path}")
+
+        st.subheader("Selected Pose Frame")
         if current_frame_bgr is not None:
             rgb_img = cv2.cvtColor(current_frame_bgr, cv2.COLOR_BGR2RGB)
             st.image(rgb_img, caption=f"Frame #{f_idx} ({rgb_img.shape[1]}x{rgb_img.shape[0]})", use_container_width=True)
@@ -347,12 +364,6 @@ if nav_choice == "🎬 Interactive 3D Viewer":
         <b>Scientific & Methodological Notice:</b> 3D coordinates represent estimated monocular poses output by Google's MediaPipe <code>pose_world_landmarks</code> neural network, measured in meters relative to the batsman's hip root. They do <b>not</b> constitute calibrated optical motion-capture ground truth.
     </div>
     """, unsafe_allow_html=True)
-
-    # Automated Playback loop
-    if st.session_state.is_playing:
-        time.sleep(0.12)
-        st.session_state.current_frame = (st.session_state.current_frame + 1) % total_frames
-        st.rerun()
 
 # --- PAGE 2: METHODOLOGY & BENCHMARK RESULTS ---
 elif nav_choice == "📊 Methodology & Benchmark Results":
