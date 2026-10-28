@@ -10,6 +10,7 @@ Features:
 
 from pathlib import Path
 import json
+import time
 import cv2
 import numpy as np
 import streamlit as st
@@ -292,18 +293,21 @@ if nav_choice == "🎬 Interactive 3D Viewer":
         st.session_state.timeline_frame = min(
             st.session_state.timeline_frame, total_frames - 1
         )
+    if "is_pose_playing" not in st.session_state:
+        st.session_state.is_pose_playing = False
 
     # Slider control
     selected_frame = st.sidebar.slider(
         "Timeline Frame Index",
         min_value=0,
         max_value=total_frames - 1,
-        step=1,
-        key="timeline_frame"
+        value=st.session_state.timeline_frame,
+        step=1
     )
+    st.session_state.timeline_frame = selected_frame
 
-    # Step buttons scrub the pose frame independently of the video player's controls.
-    col_btn1, col_btn2 = st.sidebar.columns(2)
+    # These controls animate the pose visualization independently of the video player.
+    col_btn1, col_btn2, col_btn3 = st.sidebar.columns([1, 1.3, 1])
     with col_btn1:
         st.button(
             "◀ Step",
@@ -312,6 +316,11 @@ if nav_choice == "🎬 Interactive 3D Viewer":
             use_container_width=True
         )
     with col_btn2:
+        play_label = "❚❚ Pause 3D" if st.session_state.is_pose_playing else "▶ Play 3D"
+        if st.button(play_label, use_container_width=True):
+            st.session_state.is_pose_playing = not st.session_state.is_pose_playing
+            st.rerun()
+    with col_btn3:
         st.button(
             "Step ▶",
             on_click=step_pose_frame,
@@ -364,6 +373,11 @@ if nav_choice == "🎬 Interactive 3D Viewer":
         <b>Scientific & Methodological Notice:</b> 3D coordinates represent estimated monocular poses output by Google's MediaPipe <code>pose_world_landmarks</code> neural network, measured in meters relative to the batsman's hip root. They do <b>not</b> constitute calibrated optical motion-capture ground truth.
     </div>
     """, unsafe_allow_html=True)
+
+    if st.session_state.is_pose_playing:
+        time.sleep(0.2)
+        st.session_state.timeline_frame = (f_idx + 1) % total_frames
+        st.rerun()
 
 # --- PAGE 2: METHODOLOGY & BENCHMARK RESULTS ---
 elif nav_choice == "📊 Methodology & Benchmark Results":
