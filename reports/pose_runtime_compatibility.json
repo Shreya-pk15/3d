@@ -1,0 +1,50 @@
+{
+  "system_environment": {
+    "os_platform": "Windows-10-10.0.26300-SP0 (64-bit)",
+    "python_version": "3.11.9 (tags/v3.11.9:de54cf5)",
+    "python_architecture": "64bit WindowsPE (AMD64)",
+    "pip_version": "24.0",
+    "windows_app_control_state": "Enforced (blocks unsigned/restricted third-party DLLs like torch_python.dll)"
+  },
+  "runtime_options_evaluation": {
+    "option_1_tflite_runtime": {
+      "candidate": "tflite-runtime + official MoveNet Lightning TFLite",
+      "pypi_windows_support": false,
+      "pypi_evidence": "Google does NOT publish precompiled win_amd64 wheels for tflite-runtime on PyPI (only manylinux2014, aarch64, armv7l). There is no official .tar.gz source distribution on PyPI for compilation.",
+      "source_url": "https://pypi.org/project/tflite-runtime/#files",
+      "status": "UNVIABLE_OFFICIALLY",
+      "risk": "Requires third-party unofficial/unverified community wheels which violate project trust constraints."
+    },
+    "option_2_tensorflow_cpu": {
+      "candidate": "TensorFlow (CPU) + official MoveNet Lightning TFLite",
+      "pypi_windows_support": true,
+      "compatibility": "Native CPU builds supported on Windows 64-bit Python 3.11 via `pip install tensorflow` (installs `tensorflow-intel`).",
+      "source_url": "https://pypi.org/project/tensorflow/ and https://www.tensorflow.org/install/pip",
+      "download_size": "~380 MB (wheel) / ~1.2 GB unpacked footprint",
+      "status": "VIABLE_BUT_VERY_HEAVY",
+      "risk": "Massive dependency footprint and complex DLL dependencies that could trigger App Control restrictions."
+    },
+    "option_3_mediapipe_pose": {
+      "candidate": "MediaPipe Pose (Google BlazePose / Pose Landmarker)",
+      "pypi_windows_support": true,
+      "compatibility": "Official Google precompiled wheels available on PyPI for Windows 64-bit Python 3.11 (`mediapipe-*-py3-none-win_amd64.whl`).",
+      "source_url": "https://pypi.org/project/mediapipe/#files",
+      "download_size": "~22.8 MB (wheel) / <80 MB unpacked",
+      "inference_profile": "Ultra-fast CPU inference (~15-30 ms/frame), self-contained, no PyTorch dependency.",
+      "output_capabilities": "33 2D/3D landmarks with visibility scores, directly supporting the subsequent 3D lifting project phase.",
+      "status": "HIGHLY_VIABLE_OFFICIAL_LIGHTWEIGHT"
+    },
+    "option_4_preconverted_onnx": {
+      "candidate": "ONNX Runtime CPU + Pre-converted MoveNet / YOLO-Pose ONNX",
+      "current_status_in_env": "onnxruntime 1.29.0 is already installed and verified operational with CPUExecutionProvider.",
+      "model_availability": "Neither Google nor Ultralytics distributes pre-compiled standalone .onnx files via their official release channels (both require local export via tf2onnx/PyTorch).",
+      "status": "ZERO_PACKAGE_INSTALL_IF_MODEL_COPIED",
+      "limitation": "Requires exporting the model on an external unrestricted machine and copying the resulting .onnx into models/."
+    }
+  },
+  "recommendation": {
+    "recommended_choice": "Option 3: MediaPipe Pose",
+    "justification": "1) Official Google-distributed win_amd64 binary on PyPI with exact Python 3.11 support. 2) Small download footprint (~22.8 MB vs TensorFlow's ~380 MB). 3) Operates purely on CPU without triggering Windows DLL execution blocks. 4) Provides 33 full-body landmarks (shoulders, elbows, wrists, hips, knees, ankles) including visibility flags directly suited for cricket stroke phase analysis.",
+    "alternative_zero_install": "If zero package installations are permitted, Option 4 (supplying a verified ONNX file to onnxruntime 1.29.0) is the only zero-dependency path."
+  }
+}

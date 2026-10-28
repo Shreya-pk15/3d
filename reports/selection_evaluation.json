@@ -1,0 +1,273 @@
+{
+  "total_clips_evaluated": 12,
+  "classes_represented": [
+    "Cover Drive",
+    "Defensive",
+    "Flick",
+    "Hook",
+    "Late Cut",
+    "Pull",
+    "Reverse Sweep",
+    "Scoop",
+    "Straight Drive",
+    "Upper Cut"
+  ],
+  "num_clips_differing_from_uniform": 12,
+  "percentage_differing_from_uniform": 100.0,
+  "mean_cpu_processing_time_ms": 57.03,
+  "note": "Evaluated on CPU without ground-truth 3D annotations. Demonstrates frame-selection divergence without claiming 3D reconstruction accuracy.",
+  "per_clip_evaluations": [
+    {
+      "clip": "Cover Drive/vid100_41.avi",
+      "uniform_indices": [
+        0,
+        5,
+        9,
+        14,
+        18,
+        23
+      ],
+      "motion_indices": [
+        1,
+        7,
+        9,
+        14,
+        16,
+        20
+      ],
+      "differs_from_uniform": true,
+      "processing_time_ms": 71.98
+    },
+    {
+      "clip": "Cover Drive/vid100_60.avi",
+      "uniform_indices": [
+        0,
+        5,
+        9,
+        14,
+        18,
+        23
+      ],
+      "motion_indices": [
+        3,
+        6,
+        8,
+        12,
+        16,
+        20
+      ],
+      "differs_from_uniform": true,
+      "processing_time_ms": 65.56
+    },
+    {
+      "clip": "Defensive/vid100_0.avi",
+      "uniform_indices": [
+        0,
+        5,
+        9,
+        14,
+        18,
+        23
+      ],
+      "motion_indices": [
+        0,
+        7,
+        10,
+        12,
+        16,
+        22
+      ],
+      "differs_from_uniform": true,
+      "processing_time_ms": 52.94
+    },
+    {
+      "clip": "Defensive/vid100_14.avi",
+      "uniform_indices": [
+        0,
+        5,
+        9,
+        14,
+        18,
+        23
+      ],
+      "motion_indices": [
+        0,
+        6,
+        11,
+        12,
+        16,
+        22
+      ],
+      "differs_from_uniform": true,
+      "processing_time_ms": 54.05
+    },
+    {
+      "clip": "Flick/vid100_38.avi",
+      "uniform_indices": [
+        0,
+        5,
+        9,
+        14,
+        18,
+        23
+      ],
+      "motion_indices": [
+        3,
+        7,
+        8,
+        12,
+        16,
+        20
+      ],
+      "differs_from_uniform": true,
+      "processing_time_ms": 55.95
+    },
+    {
+      "clip": "Hook/vid100_13.avi",
+      "uniform_indices": [
+        0,
+        5,
+        9,
+        14,
+        18,
+        23
+      ],
+      "motion_indices": [
+        3,
+        6,
+        11,
+        15,
+        19,
+        20
+      ],
+      "differs_from_uniform": true,
+      "processing_time_ms": 54.93
+    },
+    {
+      "clip": "Late Cut/vid101_23.avi",
+      "uniform_indices": [
+        0,
+        5,
+        9,
+        14,
+        18,
+        23
+      ],
+      "motion_indices": [
+        3,
+        7,
+        8,
+        12,
+        19,
+        22
+      ],
+      "differs_from_uniform": true,
+      "processing_time_ms": 52.38
+    },
+    {
+      "clip": "Pull/vid100_29.avi",
+      "uniform_indices": [
+        0,
+        5,
+        9,
+        14,
+        18,
+        23
+      ],
+      "motion_indices": [
+        3,
+        5,
+        8,
+        12,
+        16,
+        20
+      ],
+      "differs_from_uniform": true,
+      "processing_time_ms": 53.16
+    },
+    {
+      "clip": "Reverse Sweep/vid100_36.avi",
+      "uniform_indices": [
+        0,
+        5,
+        9,
+        14,
+        18,
+        23
+      ],
+      "motion_indices": [
+        0,
+        6,
+        11,
+        14,
+        19,
+        20
+      ],
+      "differs_from_uniform": true,
+      "processing_time_ms": 55.61
+    },
+    {
+      "clip": "Scoop/vid100_28.avi",
+      "uniform_indices": [
+        0,
+        5,
+        9,
+        14,
+        18,
+        23
+      ],
+      "motion_indices": [
+        0,
+        7,
+        10,
+        15,
+        16,
+        20
+      ],
+      "differs_from_uniform": true,
+      "processing_time_ms": 55.02
+    },
+    {
+      "clip": "Straight Drive/vid100_45.avi",
+      "uniform_indices": [
+        0,
+        5,
+        9,
+        14,
+        18,
+        23
+      ],
+      "motion_indices": [
+        3,
+        7,
+        8,
+        12,
+        16,
+        20
+      ],
+      "differs_from_uniform": true,
+      "processing_time_ms": 56.43
+    },
+    {
+      "clip": "Upper Cut/vid100_70.avi",
+      "uniform_indices": [
+        0,
+        5,
+        9,
+        14,
+        18,
+        23
+      ],
+      "motion_indices": [
+        1,
+        7,
+        8,
+        15,
+        16,
+        20
+      ],
+      "differs_from_uniform": true,
+      "processing_time_ms": 56.38
+    }
+  ]
+}

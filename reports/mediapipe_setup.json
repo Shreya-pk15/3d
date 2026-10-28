@@ -1,0 +1,61 @@
+{
+  "setup_status": "SUCCESS",
+  "python_environment": {
+    "version": "3.11.9 (tags/v3.11.9:de54cf5)",
+    "architecture": "64bit WindowsPE (AMD64)",
+    "executable": "C:\\Users\\Shreya\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "pip_version": "24.0"
+  },
+  "package_installation": {
+    "target_package": "mediapipe",
+    "installed_version": "1.2.0",
+    "wheel_file": "mediapipe-1.2.0-py3-none-win_amd64.whl (24.5 MB)",
+    "dependencies_added": [
+      "absl-py (2.5.1)",
+      "sounddevice (0.5.6)"
+    ],
+    "dependency_upgrades_or_conflicts": "None. numpy (2.4.6), opencv-contrib-python (5.0.0.93), matplotlib (3.11.2), and flatbuffers (25.12.19) were already satisfied.",
+    "pytorch_installed": false,
+    "tensorflow_installed": false,
+    "gpu_utilized": false
+  },
+  "model_asset": {
+    "model_name": "MediaPipe Pose Landmarker Lite (Float16)",
+    "model_file": "models/pose_landmarker_lite.task",
+    "file_size_bytes": 5777746,
+    "sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a",
+    "source_url": "https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/latest/pose_landmarker_lite.task",
+    "license": "Apache License 2.0"
+  },
+  "api_architecture": {
+    "api_type": "MediaPipe Tasks Vision API (mediapipe.tasks.python.vision.PoseLandmarker)",
+    "note": "MediaPipe 1.2.0 uses the modern Tasks Vision API instead of legacy mp.solutions.pose."
+  },
+  "smoke_test_results": {
+    "test_script": "src/check_mediapipe.py",
+    "test_clip": "outputs/sample_clips/Cover Drive/vid100_41.avi",
+    "frame_resolution": "896x540",
+    "running_mode": "IMAGE",
+    "hardware_acceleration": "CPU (TensorFlow Lite XNNPACK delegate)",
+    "initialization_time_ms": 97.7,
+    "inference_time_ms": 21.31,
+    "pose_detected": true,
+    "landmarks_detected_count": 33,
+    "sample_joints_detected": {
+      "nose": { "index": 0, "x": 0.4768, "y": 0.9321, "z": -0.0249, "visibility": 0.9655 },
+      "left_shoulder": { "index": 11, "x": 0.4679, "y": 0.9042, "z": -0.0173, "visibility": 0.9972 },
+      "right_shoulder": { "index": 12, "x": 0.4450, "y": 0.9558, "z": -0.0264, "visibility": 0.9946 },
+      "left_elbow": { "index": 13, "x": 0.4640, "y": 0.8950, "z": 0.0099, "visibility": 0.8564 },
+      "right_elbow": { "index": 14, "x": 0.4467, "y": 0.9641, "z": 0.0106, "visibility": 0.7816 },
+      "left_wrist": { "index": 15, "x": 0.4874, "y": 0.9027, "z": 0.0226, "visibility": 0.8184 },
+      "right_wrist": { "index": 16, "x": 0.4738, "y": 0.9786, "z": 0.0248, "visibility": 0.7696 },
+      "left_hip": { "index": 23, "x": 0.4172, "y": 0.8796, "z": 0.0038, "visibility": 0.9976 },
+      "right_hip": { "index": 24, "x": 0.4079, "y": 0.9043, "z": -0.0038, "visibility": 0.9975 },
+      "left_knee": { "index": 25, "x": 0.3937, "y": 0.8448, "z": 0.0473, "visibility": 0.2055 },
+      "right_knee": { "index": 26, "x": 0.3837, "y": 0.8684, "z": 0.0343, "visibility": 0.2375 },
+      "left_ankle": { "index": 27, "x": 0.3611, "y": 0.8071, "z": 0.0910, "visibility": 0.2650 },
+      "right_ankle": { "index": 28, "x": 0.3546, "y": 0.8172, "z": 0.0651, "visibility": 0.2415 }
+    },
+    "resource_cleanup": "Detector closed cleanly via detector.close()"
+  }
+}

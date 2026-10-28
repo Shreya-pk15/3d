@@ -1,0 +1,192 @@
+{
+  "pilot_scope": {
+    "total_clips": 12,
+    "shot_classes": 10,
+    "frames_per_method_per_clip": 6,
+    "total_evaluations_per_method": 72,
+    "total_evaluations": 144,
+    "disclaimer": "This is a 12-clip pilot benchmark. Differences illustrate empirical trends on this sample set and do not constitute formal statistical significance or validate 3D reconstruction accuracy."
+  },
+  "aggregate_comparison": {
+    "uniform": {
+      "total_frames_evaluated": 72,
+      "successful_pose_detections": 63,
+      "detection_rate_pct": 87.5,
+      "mean_inference_time_ms": 19.1,
+      "total_inference_time_ms": 1375.2,
+      "mean_landmark_visibility": 0.8289,
+      "mean_visible_landmarks_above_05": 28.62
+    },
+    "motion_aware": {
+      "total_frames_evaluated": 72,
+      "successful_pose_detections": 67,
+      "detection_rate_pct": 93.06,
+      "mean_inference_time_ms": 19.15,
+      "total_inference_time_ms": 1379.11,
+      "mean_landmark_visibility": 0.8387,
+      "mean_visible_landmarks_above_05": 29.15
+    }
+  },
+  "per_class_comparison": {
+    "Cover Drive": {
+      "uniform": {
+        "evaluated": 12,
+        "detected": 11,
+        "detection_rate_pct": 91.7,
+        "mean_visibility": 0.807,
+        "mean_visible_landmarks": 27.7
+      },
+      "motion_aware": {
+        "evaluated": 12,
+        "detected": 12,
+        "detection_rate_pct": 100.0,
+        "mean_visibility": 0.788,
+        "mean_visible_landmarks": 27.2
+      }
+    },
+    "Defensive": {
+      "uniform": {
+        "evaluated": 12,
+        "detected": 10,
+        "detection_rate_pct": 83.3,
+        "mean_visibility": 0.857,
+        "mean_visible_landmarks": 29.7
+      },
+      "motion_aware": {
+        "evaluated": 12,
+        "detected": 11,
+        "detection_rate_pct": 91.7,
+        "mean_visibility": 0.875,
+        "mean_visible_landmarks": 30.7
+      }
+    },
+    "Flick": {
+      "uniform": {
+        "evaluated": 6,
+        "detected": 6,
+        "detection_rate_pct": 100.0,
+        "mean_visibility": 0.805,
+        "mean_visible_landmarks": 27.5
+      },
+      "motion_aware": {
+        "evaluated": 6,
+        "detected": 4,
+        "detection_rate_pct": 66.7,
+        "mean_visibility": 0.887,
+        "mean_visible_landmarks": 31.0
+      }
+    },
+    "Hook": {
+      "uniform": {
+        "evaluated": 6,
+        "detected": 4,
+        "detection_rate_pct": 66.7,
+        "mean_visibility": 0.847,
+        "mean_visible_landmarks": 31.0
+      },
+      "motion_aware": {
+        "evaluated": 6,
+        "detected": 6,
+        "detection_rate_pct": 100.0,
+        "mean_visibility": 0.821,
+        "mean_visible_landmarks": 27.8
+      }
+    },
+    "Late Cut": {
+      "uniform": {
+        "evaluated": 6,
+        "detected": 5,
+        "detection_rate_pct": 83.3,
+        "mean_visibility": 0.816,
+        "mean_visible_landmarks": 28.4
+      },
+      "motion_aware": {
+        "evaluated": 6,
+        "detected": 5,
+        "detection_rate_pct": 83.3,
+        "mean_visibility": 0.886,
+        "mean_visible_landmarks": 30.8
+      }
+    },
+    "Pull": {
+      "uniform": {
+        "evaluated": 6,
+        "detected": 6,
+        "detection_rate_pct": 100.0,
+        "mean_visibility": 0.786,
+        "mean_visible_landmarks": 26.7
+      },
+      "motion_aware": {
+        "evaluated": 6,
+        "detected": 6,
+        "detection_rate_pct": 100.0,
+        "mean_visibility": 0.792,
+        "mean_visible_landmarks": 27.5
+      }
+    },
+    "Reverse Sweep": {
+      "uniform": {
+        "evaluated": 6,
+        "detected": 5,
+        "detection_rate_pct": 83.3,
+        "mean_visibility": 0.873,
+        "mean_visible_landmarks": 30.0
+      },
+      "motion_aware": {
+        "evaluated": 6,
+        "detected": 6,
+        "detection_rate_pct": 100.0,
+        "mean_visibility": 0.881,
+        "mean_visible_landmarks": 31.0
+      }
+    },
+    "Scoop": {
+      "uniform": {
+        "evaluated": 6,
+        "detected": 6,
+        "detection_rate_pct": 100.0,
+        "mean_visibility": 0.842,
+        "mean_visible_landmarks": 28.8
+      },
+      "motion_aware": {
+        "evaluated": 6,
+        "detected": 6,
+        "detection_rate_pct": 100.0,
+        "mean_visibility": 0.819,
+        "mean_visible_landmarks": 29.3
+      }
+    },
+    "Straight Drive": {
+      "uniform": {
+        "evaluated": 6,
+        "detected": 4,
+        "detection_rate_pct": 66.7,
+        "mean_visibility": 0.858,
+        "mean_visible_landmarks": 29.8
+      },
+      "motion_aware": {
+        "evaluated": 6,
+        "detected": 5,
+        "detection_rate_pct": 83.3,
+        "mean_visibility": 0.811,
+        "mean_visible_landmarks": 27.8
+      }
+    },
+    "Upper Cut": {
+      "uniform": {
+        "evaluated": 6,
+        "detected": 6,
+        "detection_rate_pct": 100.0,
+        "mean_visibility": 0.818,
+        "mean_visible_landmarks": 28.0
+      },
+      "motion_aware": {
+        "evaluated": 6,
+        "detected": 6,
+        "detection_rate_pct": 100.0,
+        "mean_visibility": 0.866,
+        "mean_visible_landmarks": 29.7
+      }
+    }
+  }
+}
